@@ -49,6 +49,7 @@ dependencies {
             'org.liquibase:liquibase-core',
             'info.picocli:picocli:4.7.1',
             'org.liquibase.ext:liquibase-hibernate6:4.21.1',
+            'org.springframework.boot:spring-boot-starter-security',
             'org.springframework.boot:spring-boot-starter-data-jpa',
             'com.h2database:h2',
     )
@@ -86,7 +87,6 @@ diffChangelog {
 }
 
 // Сборка фронтенда.
-// *****************************************************************************
 frontend {
     nodeVersion = '16.13.1'
     installScript = 'install'

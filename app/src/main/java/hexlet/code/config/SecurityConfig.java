@@ -28,7 +28,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import java.util.List;
 
-import static hexlet.code.controllers.UserController.USER_CONTROLLER_PATH;
+import static hexlet.code.controllers.UserController.CONTROLLER_PATH;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -55,8 +55,8 @@ public class SecurityConfig {
     ) {
         return new OrRequestMatcher(
             loginUrls,
-            new AntPathRequestMatcher(USER_CONTROLLER_PATH, POST.toString()),
-            new AntPathRequestMatcher(USER_CONTROLLER_PATH, GET.toString()),
+            new AntPathRequestMatcher(baseUrl + CONTROLLER_PATH, POST.toString()),
+            new AntPathRequestMatcher(baseUrl + CONTROLLER_PATH, GET.toString()),
             new NegatedRequestMatcher(new AntPathRequestMatcher(baseUrl + "/**"))
         );
     }
