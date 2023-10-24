@@ -38,32 +38,39 @@ public class UserController {
     @Content(schema = @Schema(implementation = User.class)))
     )
     @GetMapping
-    public List<User> getAll() {
-        return userService.getAll();
+    public List<UserDto> getAll() {
+        return userService.getAll()
+            .stream()
+            .map(UserDto::new)
+            .toList();
     }
 
     @ApiResponses(@ApiResponse(responseCode = "200"))
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable final Long id) {
-        return userService.getById(id);
+    public UserDto getUserById(@PathVariable final Long id) {
+        return new UserDto(
+            userService.getById(id)
+        );
     }
 
     @Operation(summary = "Create new user")
     @ApiResponse(responseCode = "201", description = "User created")
     @PostMapping
     @ResponseStatus(CREATED)
-    public User registerNew(@RequestBody @Valid final UserDto dto) {
-        return userService.createNewUser(dto);
+    public UserDto registerNew(@RequestBody @Valid final UserDto dto) {
+        return new UserDto(
+            userService.createNewUser(dto)
+        );
     }
 
     @PutMapping("/{id}")
-//    @PreAuthorize(ONLY_OWNER_BY_ID)
-    public User update(@PathVariable final long id, @RequestBody @Valid final UserDto dto) {
-        return userService.updateUser(id, dto);
+    public UserDto update(@PathVariable final long id, @RequestBody @Valid final UserDto dto) {
+        return new UserDto(
+            userService.updateUser(id, dto)
+        );
     }
 
     @DeleteMapping("/{id}")
-//    @PreAuthorize(ONLY_OWNER_BY_ID)
     public void delete(@PathVariable final long id) {
         userService.delete(id);
     }
