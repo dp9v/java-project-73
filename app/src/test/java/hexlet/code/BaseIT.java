@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import hexlet.code.component.JWTHelper;
 import hexlet.code.controllers.UserController;
 import hexlet.code.dtos.UserDto;
+import hexlet.code.repositories.TaskStatusRepository;
 import hexlet.code.repositories.UserRepository;
 import hexlet.code.services.UserService;
 import lombok.SneakyThrows;
@@ -36,7 +37,7 @@ public abstract class BaseIT {
     @Autowired
     UserRepository userRepository;
     @Autowired
-    UserService userService;
+    TaskStatusRepository taskStatusRepository;
     @Autowired
     private JWTHelper jwtHelper;
     @Autowired
@@ -52,6 +53,7 @@ public abstract class BaseIT {
     @AfterEach
     public void dropAll() {
         userRepository.deleteAll();
+        taskStatusRepository.deleteAll();
     }
 
 

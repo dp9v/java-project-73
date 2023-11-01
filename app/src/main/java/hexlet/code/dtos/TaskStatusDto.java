@@ -5,12 +5,12 @@ import hexlet.code.models.TaskStatus;
 import java.util.Date;
 
 public record TaskStatusDto(
-    String id,
+    Long id,
     String name,
     Date createdAt
 ) {
 
     public TaskStatusDto(TaskStatus status) {
-        this(status.getId().toString(), status.getName(), status.getCreatedAt());
+        this(status.getId(), status.getName(), status.getCreatedAt());
     }
 }
