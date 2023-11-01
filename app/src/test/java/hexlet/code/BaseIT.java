@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -38,6 +39,8 @@ public abstract class BaseIT {
     UserService userService;
     @Autowired
     private JWTHelper jwtHelper;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
 
     @SneakyThrows
@@ -72,6 +75,11 @@ public abstract class BaseIT {
     public ResultActions performByUser(MockHttpServletRequestBuilder request, String userEmail) {
         var token = jwtHelper.expiring(Map.of("username", userEmail));
         request.header(AUTHORIZATION, token);
+        return perform(request);
+    }
+
+    @SneakyThrows
+    public ResultActions perform(MockHttpServletRequestBuilder request) {
         return mockMvc.perform(request);
     }
 }

@@ -8,12 +8,13 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 public record UserDto(
+    Long id,
     @NotBlank @Email String email,
     @NotBlank String firstName,
     @NotBlank String lastName,
     @NotBlank @Size(min = 3, max = 100) String password
 ) {
     public UserDto(User user){
-        this(user.getEmail(), user.getFirstName(), user.getLastName(), null);
+        this(user.getId(), user.getEmail(), user.getFirstName(), user.getLastName(), null);
     }
 }
