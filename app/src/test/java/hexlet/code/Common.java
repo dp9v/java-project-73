@@ -2,13 +2,8 @@ package hexlet.code;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hexlet.code.dtos.TaskStatusDto;
 import hexlet.code.dtos.UserDto;
-import hexlet.code.models.TaskStatus;
 import lombok.SneakyThrows;
-
-import java.time.Instant;
-import java.util.Date;
 
 public class Common {
     private static final ObjectMapper MAPPER = new ObjectMapper();
@@ -25,12 +20,12 @@ public class Common {
     public static final String STATUS_LABEL = "test_label";
 
     public static final UserDto DEFAULT_USER = new UserDto(
-        null, DEFAULT_EMAIL, DEFAULT_FIRST_NAME, DEFAULT_LAST_NAME, DEFAULT_PASSWORD
-    );
+        null, DEFAULT_EMAIL, DEFAULT_FIRST_NAME, DEFAULT_LAST_NAME, DEFAULT_PASSWORD,
+        user.getCreatedAt());
 
     public static final UserDto TEST_USER = new UserDto(
-        null, TEST_EMAIL, TEST_FIRST_NAME, TEST_LAST_NAME, TEST_PASSWORD
-    );
+        null, TEST_EMAIL, TEST_FIRST_NAME, TEST_LAST_NAME, TEST_PASSWORD,
+        user.getCreatedAt());
 
     @SneakyThrows
     public static String asJson(final Object object) {
